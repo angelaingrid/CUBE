@@ -115,34 +115,54 @@
         <!-- 手冊內頁區域 (Main Content Area) -->
         <main class="flex-grow p-5 sm:p-8 bg-white">
 
-            <!-- ==================== 第 1 頁：航班與集合 ==================== -->
+            <!-- ==================== 第 1 頁：航班與集合資訊 ==================== -->
             <section id="page-0" class="page-content active space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                     <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
                         <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm"><i class="fa-solid fa-plane"></i></span>
-                        航班資訊與集合提醒
+                        航班時刻與集合資訊
                     </h2>
                     <span class="text-xs font-semibold text-slate-400 tracking-widest">PAGE 01 / 05</span>
                 </div>
 
-                <!-- 集合資訊高亮卡片 -->
-                <div class="bg-amber-50 border border-amber-200/80 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <!-- 集合重點提醒卡片 -->
+                <div class="bg-amber-50/90 border border-amber-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div class="space-y-1.5">
-                        <span class="inline-block bg-amber-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-md">出發集合資訊</span>
-                        <h3 class="text-lg font-bold text-amber-950">2026/11/26 (四) 早上 05:50 準時集合</h3>
-                        <p class="text-sm text-amber-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-location-dot text-amber-600"></i>
-                            <span>集合地點：<strong>桃園國際機場 第二航廈 長榮航空櫃台</strong></span>
-                        </p>
+                        <div class="inline-flex items-center gap-1.5 text-amber-800 font-bold text-sm">
+                            <i class="fa-solid fa-bell text-amber-500"></i>
+                            <span>出發集合重要資訊</span>
+                        </div>
+                        <p class="text-lg font-bold text-slate-900">2026/11/26 (四) 早上 05:50 準時集合</p>
+                        <p class="text-sm text-slate-700"><i class="fa-solid fa-location-dot text-amber-600 mr-1.5"></i>地點：<strong>桃園國際機場 第二航廈 長榮航空報到櫃台</strong></p>
                     </div>
-                    <div class="bg-white/80 rounded-xl p-3.5 border border-amber-200/60 text-sm space-y-1 min-w-[220px]">
+                    <div class="bg-white/80 rounded-xl p-3.5 border border-amber-200/60 text-sm space-y-1.5 min-w-[260px]">
                         <div class="flex justify-between">
                             <span class="text-slate-500">隨團導遊：</span>
-                            <span class="font-bold text-slate-800">Nicky Hsu</span>
+                            <span class="font-bold text-slate-800">MR. Nicky Hsu</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-slate-500">導遊電話：</span>
                             <a href="tel:09271986167" class="font-bold text-sky-600 hover:underline">0927-198-6167</a>
+                        </div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-slate-500">LINE ID：</span>
+                            <div class="flex items-center gap-1.5">
+                                <span id="guide-line-id" class="font-bold text-emerald-600 font-mono">nickyshu</span>
+                                <button onclick="copyText('guide-line-id', '已複製導遊 LINE ID！')" class="text-[11px] bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-medium transition">
+                                    複製
+                                </button>
+                            </div>
+                        </div>
+                        <!-- 導遊 LINE QR Code 區塊 -->
+                        <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-lg p-2.5 flex items-center gap-3 my-1">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fline.me%2Fti%2Fp%2F~nickyshu" alt="導遊 Nicky Hsu LINE QR Code" onerror="this.onerror=null;this.src='https://placehold.co/96x96/10b981/ffffff?text=LINE+QR';" class="w-16 h-16 rounded-md bg-white p-1 border border-emerald-200 flex-shrink-0">
+                            <div class="text-xs leading-snug space-y-1">
+                                <div class="font-bold text-emerald-900"><i class="fa-brands fa-line text-emerald-600 mr-1"></i>掃碼加導遊 LINE</div>
+                                <p class="text-slate-600 text-[11px]">手機可直接長按掃描或搜尋 ID：<strong class="text-emerald-700">nickyshu</strong></p>
+                                <a href="https://line.me/ti/p/~nickyshu" target="_blank" class="inline-block text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-2.5 py-0.5 rounded transition">
+                                    點此直接開啟 LINE
+                                </a>
+                            </div>
                         </div>
                         <div class="border-t border-slate-100 my-1 pt-1 flex justify-between">
                             <span class="text-slate-500">送機人員：</span>
@@ -877,8 +897,9 @@
         /**
          * 複製文字至剪貼簿 (相容 iFrame 環境)
          * @param {string} elementId - 目標元素 ID
+         * @param {string} [successMsg] - 自訂複製成功提示文字
          */
-        function copyText(elementId) {
+        function copyText(elementId, successMsg) {
             const text = document.getElementById(elementId).innerText;
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -888,7 +909,7 @@
             textarea.select();
             try {
                 document.execCommand('copy');
-                showToast('已複製飯店英文地址！');
+                showToast(successMsg || '已複製飯店英文地址！');
             } catch (err) {
                 showToast('複製失敗，請手動選取複製');
             }
