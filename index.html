@@ -11,6 +11,15 @@
     <!-- 引入 FontAwesome 圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 整體放大基礎字級，讓所有 Tailwind rem 單位同步放大，閱讀更輕鬆 */
+        html {
+            font-size: 18px;
+        }
+        @media (min-width: 640px) {
+            html {
+                font-size: 19px;
+            }
+        }
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
             background-color: #f0f4f8;
